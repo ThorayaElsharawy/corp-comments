@@ -1,11 +1,12 @@
 type HashtagItemProps = {
-    company: string
+    company: string,
+    setSelectedCompany: React.Dispatch<React.SetStateAction<string>>
 }
 
-export default function HashtagItem({ company }: HashtagItemProps) {
+export default function HashtagItem({ company, setSelectedCompany }: HashtagItemProps) {
     return (
         <li key={company}>
-            <button>#{company}</button>
+            <button onClick={() => setSelectedCompany(company)}>#{company}</button>
         </li>
     )
 }

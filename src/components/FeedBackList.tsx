@@ -1,21 +1,22 @@
-import { GoTriangleUp } from "react-icons/go";
+import FeedbackItem from "./FeedbackItem";
+import Spinner from "./spinner";
+import ErrorMessage from "./ErrorMessage";
+import { type TFeedbackItem } from "../lib/types";
 
-export default function FeedBackList() {
+type FeedBackListProps = {
+    feedbackItems: TFeedbackItem[];
+    isLoading: boolean;
+    error: string
+}
+
+export default function FeedBackList({feedbackItems, isLoading, error} : FeedBackListProps) {
     return <ol className="feedback-list">
-        <li className="feedback">
-            <button>
-                <GoTriangleUp />
+        {isLoading && <Spinner />}
 
-                <span>593</span>
-            </button>
-            <div>
-                <p>F</p>
-            </div>
-            <div>
-                <p>Facebook</p>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellat consectetur eligendi quaerat maiores minus quasi?</p>
-            </div>
-            <p>4d</p>
-        </li>
+        {error && <ErrorMessage message={error} />}
+
+        {!isLoading && feedbackItems.map(feedbackItem => (
+            <FeedbackItem key={feedbackItem.id} feedbackItem={feedbackItem} />
+        ))}
     </ol>
 }

@@ -1,13 +1,19 @@
+import { TFeedbackItem } from "../lib/types"
 import FeedBackList from "./FeedBackList"
 import Header from "./Header"
 
-type ContainerProps = {}
+type ContainerProps = {
+    feedbackItems: TFeedbackItem[];
+    isLoading: boolean;
+    error: string;
+    handleAddFeedback: (text: string) => void
+}
 
-export default function Container({ }: ContainerProps) {
+export default function Container({ feedbackItems, isLoading, error, handleAddFeedback }: ContainerProps) {
     return (
         <main className="container">
-            <Header />
-            <FeedBackList />
+            <Header handleAddFeedback={handleAddFeedback} />
+            <FeedBackList feedbackItems={feedbackItems} isLoading={isLoading} error={error} />
         </main>
     )
 }

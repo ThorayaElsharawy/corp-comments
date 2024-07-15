@@ -1,7 +1,11 @@
 import { useState } from "react"
 import { MAX_CHARACTERS } from "../lib/constants";
 
-export default function FeedbackForm() {
+type FeedbackFormProps = {
+    onAddFeedback: (text: string) => void
+}
+
+export default function FeedbackForm({ onAddFeedback }: FeedbackFormProps) {
     const [text, setText] = useState("")
     const charCount = MAX_CHARACTERS - text.length;
 
@@ -11,7 +15,14 @@ export default function FeedbackForm() {
         setText(newText)
     }
 
-    return <form className="form">
+    const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault()
+
+        onAddFeedback(text)
+        setText('')
+    }
+
+    return <form onSubmit={handleSubmit} className="form">
         <textarea
             value={text}
             onChange={handleChange}

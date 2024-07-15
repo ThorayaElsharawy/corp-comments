@@ -229,6 +229,7 @@ label {
     color: #fff;
     opacity: 0.42;
     pointer-events: none;
+    width: 90%;
 }
 
 label::selection,

@@ -1,5 +1,5 @@
 import { GoTriangleUp } from "react-icons/go";
-import { type TFeedbackItem } from "../lib/types"; 
+import { type TFeedbackItem } from "../../lib/types"; 
 
 type FeedbackItemProps = {
     feedbackItem: TFeedbackItem

@@ -3,11 +3,10 @@ import Container from "./components/layout/Container"
 import Footer from "./components/layout/Footer"
 import HashtagList from "./components/hashtag/HashtagList"
 import { TFeedbackItem } from "./lib/types"
+import { useFeedBackItem } from "./hooks"
 
 function App() {
-  const [feedbackItems, setFeedbackItems] = useState<TFeedbackItem[]>([])
-  const [isLoading, setIsLoading] = useState(false)
-  const [error, setError] = useState('');
+  const { feedbackItems, setFeedbackItems, error, isLoading } = useFeedBackItem()
   const [selectedCompany, setSelectedCompany] = useState('')
 
   const filterdFeedbackItems = useMemo(() => selectedCompany ?
@@ -40,25 +39,7 @@ function App() {
     })
   }
 
-  useEffect(() => {
-    const fetchFeedBack = async () => {
-      setIsLoading(true)
-      try {
-        const res = await fetch("https://bytegrad.com/course-assets/projects/corpcomment/api/feedbacks")
-        if (!res.ok) {
-          throw new Error('Something went wrong')
-        }
-        const data = await res.json()
-        console.log(data)
-        setFeedbackItems(data.feedbacks)
-      } catch (error) {
-        setError('Something went wrong')
-      }
-      setIsLoading(false)
-    }
 
-    fetchFeedBack()
-  }, [])
 
   return (
     <div className="app">
